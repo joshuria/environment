@@ -1,0 +1,5 @@
+{
+    "clangd.path": "/usr/bin/clangd-17",
+    "diagnostic.checkCurrentLine": true,
+    "signature.preferShownAbove": false
+}

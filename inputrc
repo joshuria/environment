@@ -1,0 +1,12 @@
+set show-all-if-ambiguous on
+set completion-ignore-case on
+set editing-mode vi
+set keymap vi-command
+set skip-completed-text on
+set input-meta on
+set output-meta on
+set convert-meta off
+set bell-style none
+set match-hidden-files off
+set show-mode-in-prompt on
+
