@@ -32,8 +32,10 @@ format_exit_code() {
     # fi
 }
 
-#export PS1="[\[$(tput sgr0)\]\[\033[38;5;11m\]\@\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]\[\033[38;5;6m\]\u\[$(tput sgr0)\]\[\033[38;5;175m\]@\[$(tput sgr0)\]\[\033[38;5;174m\]\h\[$(tput sgr0)\]\[\033[38;5;15m\]] \[$(tput sgr0)\]\[\033[38;5;121m\]\w\[$(tput sgr0)\]\[\033[38;5;15m\]\n\\$ \[$(tput sgr0)\]"
+if [ -t 1 ]; then
+    #export PS1="[\[$(tput sgr0)\]\[\033[38;5;11m\]\@\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]\[\033[38;5;6m\]\u\[$(tput sgr0)\]\[\033[38;5;175m\]@\[$(tput sgr0)\]\[\033[38;5;174m\]\h\[$(tput sgr0)\]\[\033[38;5;15m\]] \[$(tput sgr0)\]\[\033[38;5;121m\]\w\[$(tput sgr0)\]\[\033[38;5;15m\]\n\\$ \[$(tput sgr0)\]"
 export PS1="\$(format_exit_code)\n[\[$(tput sgr0)\]\[\033[38;5;11m\]\t\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]\[\033[38;5;6m\]\u\[$(tput sgr0)\]\[\033[38;5;175m\]@\[$(tput sgr0)\]\[\033[38;5;174m\]\h\[$(tput sgr0)\]\[\033[38;5;15m\]] \[$(tput sgr0)\]\[\033[38;5;121m\]\w\[$(tput sgr0)\]\[\033[38;5;15m\]\n \[\e[91m\]\$(parse_git_branch)\[\e[00m\]\\$ \[$(tput sgr0)\]"
+fi
 
 export CLICOLOR=1
 #export LSCOLORS=ExFxBxDxCxegedabagacad
