@@ -1,3 +1,5 @@
+" source $VIMRUNTIME/mswin.vim
+
 set nocompatible
 set langmenu=en
 set termencoding=utf8
@@ -113,7 +115,7 @@ endfun
 " autocmd FileType markdown autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
 
 " Enable python, node
-" let g:python3_host_prog='/opt/local/bin/python'
+let g:python3_host_prog='/usr/bin/python3.12'
 
 " vim-plug
 call plug#begin('~/.config/nvim/plugged')
@@ -296,3 +298,17 @@ let g:SimpylFold_docstring_preview = 1
 let g:coc_disable_startup_warning = 1
 
 hi Search ctermfg=DarkRed
+
+" " clipboard fix
+" let g:clipboard = {
+"     \   'name': 'macos+tmux',
+"     \   'copy': {
+"     \      '+': ['pbcopy'],
+"     \      '*': ['tmux', 'load-buffer', '-'],
+"     \    },
+"     \   'paste': {
+"     \      '+': ['pbpaste'],
+"     \      '*': ['tmux', 'save-buffer', '-'],
+"     \   },
+"     \   'cache_enabled': 0,
+"     \ }

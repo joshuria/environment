@@ -32,16 +32,16 @@ format_exit_code() {
     # fi
 }
 
-if [ -t 1 ]; then
-    #export PS1="[\[$(tput sgr0)\]\[\033[38;5;11m\]\@\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]\[\033[38;5;6m\]\u\[$(tput sgr0)\]\[\033[38;5;175m\]@\[$(tput sgr0)\]\[\033[38;5;174m\]\h\[$(tput sgr0)\]\[\033[38;5;15m\]] \[$(tput sgr0)\]\[\033[38;5;121m\]\w\[$(tput sgr0)\]\[\033[38;5;15m\]\n\\$ \[$(tput sgr0)\]"
+#export PS1="[\[$(tput sgr0)\]\[\033[38;5;11m\]\@\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]\[\033[38;5;6m\]\u\[$(tput sgr0)\]\[\033[38;5;175m\]@\[$(tput sgr0)\]\[\033[38;5;174m\]\h\[$(tput sgr0)\]\[\033[38;5;15m\]] \[$(tput sgr0)\]\[\033[38;5;121m\]\w\[$(tput sgr0)\]\[\033[38;5;15m\]\n\\$ \[$(tput sgr0)\]"
 export PS1="\$(format_exit_code)\n[\[$(tput sgr0)\]\[\033[38;5;11m\]\t\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]\[\033[38;5;6m\]\u\[$(tput sgr0)\]\[\033[38;5;175m\]@\[$(tput sgr0)\]\[\033[38;5;174m\]\h\[$(tput sgr0)\]\[\033[38;5;15m\]] \[$(tput sgr0)\]\[\033[38;5;121m\]\w\[$(tput sgr0)\]\[\033[38;5;15m\]\n \[\e[91m\]\$(parse_git_branch)\[\e[00m\]\\$ \[$(tput sgr0)\]"
-fi
 
 export CLICOLOR=1
 #export LSCOLORS=ExFxBxDxCxegedabagacad
 export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
 export LANG=en_US.UTF-8
-export TERM=xterm-256color
+if [[ -z $TMUX ]]; then
+    export TERM=xterm-256color
+fi
 
 if [[ -z $ENV_INITED ]] && [[ -z $TMUX ]]; then
     export PATH=~/tools/mold-2.32.0/bin:~/tools/:/snap/bin:$PATH:~/packages/node-v20.6.1-linux-x64/bin
@@ -65,6 +65,10 @@ unset rc
 
 export EDITOR=vim
 
+export CC=/usr/bin/gcc-11
+export CXX=/usr/bin/g++-11
+export CMAKE_C_COMPILER=$CC
+export CMAKE_CXX_COMPILER=$CXX
 export CMAKE_C_STANDARD=17
 export CMAKE_CXX_STANDARD=23
 export CMAKE_C_COMPILER_LAUNCHER=ccache
