@@ -15,7 +15,7 @@ alias vim=nvim
 alias gitco='git checkout'
 alias gitlog='git log --oneline'
 alias gitstat='git status'
-alias python3=/usr/bin/python3.12
+alias python3=/usr/bin/python3.13
 
 parse_git_branch() {
      git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
@@ -32,6 +32,10 @@ format_exit_code() {
     # fi
 }
 
+if [[ -z $TMUX ]]; then
+    export TERM=xterm-256color
+fi
+
 #export PS1="[\[$(tput sgr0)\]\[\033[38;5;11m\]\@\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]\[\033[38;5;6m\]\u\[$(tput sgr0)\]\[\033[38;5;175m\]@\[$(tput sgr0)\]\[\033[38;5;174m\]\h\[$(tput sgr0)\]\[\033[38;5;15m\]] \[$(tput sgr0)\]\[\033[38;5;121m\]\w\[$(tput sgr0)\]\[\033[38;5;15m\]\n\\$ \[$(tput sgr0)\]"
 export PS1="\$(format_exit_code)\n[\[$(tput sgr0)\]\[\033[38;5;11m\]\t\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]\[\033[38;5;6m\]\u\[$(tput sgr0)\]\[\033[38;5;175m\]@\[$(tput sgr0)\]\[\033[38;5;174m\]\h\[$(tput sgr0)\]\[\033[38;5;15m\]] \[$(tput sgr0)\]\[\033[38;5;121m\]\w\[$(tput sgr0)\]\[\033[38;5;15m\]\n \[\e[91m\]\$(parse_git_branch)\[\e[00m\]\\$ \[$(tput sgr0)\]"
 
@@ -39,12 +43,10 @@ export CLICOLOR=1
 #export LSCOLORS=ExFxBxDxCxegedabagacad
 export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
 export LANG=en_US.UTF-8
-if [[ -z $TMUX ]]; then
-    export TERM=xterm-256color
-fi
+export HISTCONTROL=ignoredups
 
 if [[ -z $ENV_INITED ]] && [[ -z $TMUX ]]; then
-    export PATH=~/tools/mold-2.32.0/bin:~/tools/:/snap/bin:$PATH:~/packages/node-v20.6.1-linux-x64/bin
+    export PATH=~/tools/mold-2.37.1/bin:~/tools/:/snap/bin:$PATH:~/packages/node-v20.6.1-linux-x64/bin
     export ENV_INITED=1
 fi
 export NODE_PATH=${NODE_PATH:+$NODE_PATH:}/usr/local/lib/node_modules
@@ -65,8 +67,8 @@ unset rc
 
 export EDITOR=vim
 
-export CC=/usr/bin/gcc-11
-export CXX=/usr/bin/g++-11
+export CC=/usr/bin/clang-20
+export CXX=/usr/bin/clang++-20
 export CMAKE_C_COMPILER=$CC
 export CMAKE_CXX_COMPILER=$CXX
 export CMAKE_C_STANDARD=17
