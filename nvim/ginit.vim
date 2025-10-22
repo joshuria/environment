@@ -1,5 +1,3 @@
-" source $VIMRUNTIME/mswin.vim
-
 set nocompatible
 set langmenu=en
 set termencoding=utf8
@@ -29,30 +27,12 @@ set mouse=a
 set title
 set ww="b,s"
 
-" case insensitive file name completion
-set wildignorecase
+" Mac copy paste
+source $VIMRUNTIME/macmap.vim
 
 " Prompt reload
 set noautoread
 au FocusGained * :checktime
-
-" Highlight special chars
-"set lcs=tab:▷\ ,trail:·,extends:◣,precedes:◢,nbsp:○,eol:↵
-set lcs=tab:▷\ ,trail:·,extends:◣,precedes:◢,nbsp:○
-set list
-
-command! -nargs=? -range=% -complete=custom,s:StripCompletionOptions
-    \ Stripsp <line1>,<line2>call s:Stripsp(<f-args>)
-
-function! s:Stripsp(...) abort
-    let confirm = a:0
-    execute a:firstline . ',' . a:lastline . 's/\s\+$//e' . (confirm ? 'c' : '')
-endfunction
-
-function! s:StripCompletionOptions(A,L,P) abort
-    return "-confirm"
-endfunction
-
 
 " Moving tab
 nnoremap <silent><A-Left> :tabm -1<CR>
@@ -62,61 +42,11 @@ map <C-down> <C-E>
 map <C-up> <C-Y>
 nnoremap <C-Enter> :checktime<CR>
 
-" Remap <C-f> and <C-b> for scroll float windows/popups.
-if has('nvim-0.4.0') || has('patch-8.2.0750')
-  nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-  nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-  inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
-  inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
-  vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-  vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-endif
-
-" copy paste cut save select-all
-" Ref https://github.com/vim/vim/blob/master/runtime/mswin.vim
-if has("clipboard")
-    " Copy
-    vnoremap <C-C> "+y
-    " Cut
-    vnoremap <C-X> "+x
-    " Paste
-    map <C-V> "+gP
-    cmap <C-V> <C-R>+
-    exe 'inoremap <script> <A-V> <A-G>u' . paste#paste_cmd['i']
-    exe 'vnoremap <script> <A-V> ' . paste#paste_cmd['v']
-    if !has("unix")
-        set guioptions-=a
-    endif
-endif
-exe 'inoremap <script> <C-V> <C-G>u' . paste#paste_cmd['i']
-exe 'vnoremap <script> <C-V> ' . paste#paste_cmd['v']
-
-" SelectAll
-noremap <C-A> gggH<C-O>G
-inoremap <C-A> <C-O>gg<C-O>gH<C-O>G
-cnoremap <C-A> <C-C>gggH<C-O>G
-onoremap <C-A> <C-C>gggH<C-O>G
-snoremap <C-A> <C-C>gggH<C-O>G
-xnoremap <C-A> <C-C>ggVG
-" Save
-noremap <C-S> :update<CR>
-vnoremap <C-S> :<C-C>:update<CR>
-inoremap <C-S> :<Esc>:update<CR>gi
-" Undo
-noremap <C-Z> u
-inoremap <C-Z> <C-O>u
-" Redo
-noremap <C-Y> <C-R>
-inoremap <C-Y> <C-O><C-R>
-
-" Map select current line without newline
-noremap vv 0vg_
-
 " Theme
 let g:rehash256 = 1
 set bg=dark
 colorscheme desert
-set guifont=Noto\ Mono\ for\ Powerline:h12
+set guifont=Noto\ Mono\ for\ Powerline:h14
 if exists('+colorcolumn')
   set colorcolumn=100
 else
@@ -133,7 +63,7 @@ endfun
 " autocmd FileType markdown autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
 
 " Enable python, node
-let g:python3_host_prog='/usr/bin/python3.12'
+let g:python3_host_prog='/opt/local/bin/python'
 
 " vim-plug
 call plug#begin('~/.config/nvim/plugged')
@@ -145,8 +75,6 @@ Plug 'kristijanhusak/defx-icons'
 Plug 'ryanoasis/vim-devicons'
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-" Coc installed extensions:
-"    explorer, tsserver, clangd, pyright, markdown-preview-enhanced, json, rust-rust-analyzer
 
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -238,10 +166,9 @@ let g:airline_powerline_fonts = 1
 set t_Co=256
 
 " coc, ref: https://ianding.io/2019/07/29/configure-coc-nvim-for-c-c++-development/
-"set hidden
-set signcolumn=yes
+set hidden
 set cmdheight=2
-set updatetime=300
+set updatetime=500
 set shortmess+=c
 
 " Tab complete
@@ -273,11 +200,6 @@ autocmd CursorHoldI,CursorMovedI * silent! call CocActionAsync('showSignatureHel
 
 " Use K to show documentation in preview window
 nnoremap <silent> K :call <SID>show_documentation()<CR>
-" GoTo code navigation
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
@@ -304,8 +226,8 @@ let g:NERDCommentEmptyLines = 1
 let g:NERDTrimTrailingWhitespace = 1
 let g:NERDToggleCheckAllLines = 1
 let g:NERDDefaultAlign = 'left'
-nmap <C-_> <leader>c<Space>
-vmap <C-_> <leader>c<Space>
+nmap <C-/> <leader>c<Space>
+vmap <C-/> <leader>c<Space>
 
 " Fast fold: https://github.com/Konfekt/FastFold
 nmap zuz <Plug>(FastFoldUpdate)
@@ -314,8 +236,4 @@ let g:fastfold_fold_command_suffixes =  ['x','X','a','A','o','O','c','C']
 let g:fastfold_fold_movement_commands = [']z', '[z', 'zj', 'zk']
 autocmd FileType python setlocal foldmethod=indent
 let g:SimpylFold_docstring_preview = 1
-
-let g:coc_disable_startup_warning = 1
-
-hi Search ctermfg=DarkRed
 

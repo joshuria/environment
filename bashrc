@@ -15,7 +15,7 @@ alias vim=nvim
 alias gitco='git checkout'
 alias gitlog='git log --oneline'
 alias gitstat='git status'
-alias python3=/usr/bin/python3.12
+alias python3=/usr/bin/python3.13
 
 parse_git_branch() {
      git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
@@ -46,7 +46,7 @@ export LANG=en_US.UTF-8
 export HISTCONTROL=ignoredups
 
 if [[ -z $ENV_INITED ]] && [[ -z $TMUX ]]; then
-    export PATH=~/tools/mold-2.37.0/bin:~/tools/:/snap/bin:$PATH:~/packages/node-v20.6.1-linux-x64/bin
+    export PATH=~/tools/mold-2.37.1/bin:~/tools/:/snap/bin:$PATH:~/packages/node-v20.6.1-linux-x64/bin
     export ENV_INITED=1
 fi
 export NODE_PATH=${NODE_PATH:+$NODE_PATH:}/usr/local/lib/node_modules
