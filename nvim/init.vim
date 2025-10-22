@@ -36,6 +36,24 @@ set wildignorecase
 set noautoread
 au FocusGained * :checktime
 
+" Highlight special chars
+"set lcs=tab:▷\ ,trail:·,extends:◣,precedes:◢,nbsp:○,eol:↵
+set lcs=tab:▷\ ,trail:·,extends:◣,precedes:◢,nbsp:○
+set list
+
+command! -nargs=? -range=% -complete=custom,s:StripCompletionOptions
+    \ Stripsp <line1>,<line2>call s:Stripsp(<f-args>)
+
+function! s:Stripsp(...) abort
+    let confirm = a:0
+    execute a:firstline . ',' . a:lastline . 's/\s\+$//e' . (confirm ? 'c' : '')
+endfunction
+
+function! s:StripCompletionOptions(A,L,P) abort
+    return "-confirm"
+endfunction
+
+
 " Moving tab
 nnoremap <silent><A-Left> :tabm -1<CR>
 nnoremap <silent><A-Right> :tabm +1<CR>
