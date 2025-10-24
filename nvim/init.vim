@@ -2,7 +2,6 @@
 
 set nocompatible
 set langmenu=en
-set termencoding=utf8
 set encoding=utf8
 set fileencodings=ucs-bom,utf-8,big5,latin1,utf-16
 set fileencoding=utf-8
@@ -13,7 +12,6 @@ set ts=4
 set smarttab
 set et
 set lbr
-set guioptions-=T
 set ff=unix
 set so=4
 set nobackup
