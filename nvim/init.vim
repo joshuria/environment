@@ -316,4 +316,6 @@ let g:SimpylFold_docstring_preview = 1
 let g:coc_disable_startup_warning = 1
 
 hi Search ctermfg=DarkRed
+hi Normal ctermbg=NONE guibg=NONE
+hi NonText ctermbg=NONE guibg=NONE
 
