@@ -21,3 +21,47 @@ fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+alias sync='sync;sync;sync;'
+alias cls='clear'
+alias free='free -h'
+alias df='df -h'
+alias du='du -h'
+alias vim=nvim
+alias gitco='git checkout'
+alias gitlog='git log --oneline'
+alias gitstat='git status'
+
+export VCPKG_ROOT=~/tools/vcpkg
+
+if [[ -z $ENV_INITED ]] && [[ -z $TMUX ]]; then
+    export PATH=~/.local/bin:$PATH
+    export ENV_INITED=1
+fi
+export NODE_PATH=${NODE_PATH:+$NODE_PATH:}/usr/local/lib/node_modules
+
+# Uncomment the following line if you don't like systemctl's auto-paging feature:
+# export SYSTEMD_PAGER=
+
+unset rc
+
+export CMAKE_C_STANDARD=17
+export CMAKE_CXX_STANDARD=26
+export CMAKE_C_COMPILER_LAUNCHER=ccache
+export CMAKE_CXX_COMPILER_LAUNCHER=ccache
+
+export XMODIFIERS="@im=fcitx"
+export EDITOR="vim"
+
+export PYTHON_BASIC_REPL=1
+bindkey -v
+
+. "$HOME/.cargo/env"
+
+# Auto suggestion
+source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+# bindkey '^E' autosuggest-accept
+bindkey '\t' end-of-line
+
+# Enable syntax highlight, must put at end of this file
+source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
