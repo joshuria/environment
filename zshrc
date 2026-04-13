@@ -22,12 +22,15 @@ fi
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+alias ls='ls --color'
+alias ll='ls -lh'
+alias la='ls -alh'
 alias sync='sync;sync;sync;'
 alias cls='clear'
 alias free='free -h'
 alias df='df -h'
 alias du='du -h'
-alias vim=nvim
+# alias vim=nvim
 alias gitco='git checkout'
 alias gitlog='git log --oneline'
 alias gitstat='git status'
@@ -35,7 +38,8 @@ alias gitstat='git status'
 export VCPKG_ROOT=~/tools/vcpkg
 
 if [[ -z $ENV_INITED ]] && [[ -z $TMUX ]]; then
-    export PATH=~/.local/bin:$PATH
+    # export PATH=~/tools/mold-2.37.1/bin:~/tools/:/snap/bin:$PATH:~/.nvm/versions/node/v22.14.0/bin
+    export PATH=~/tools/:/snap/bin:$PATH:~/.nvm/versions/node/v22.14.0/bin
     export ENV_INITED=1
 fi
 export NODE_PATH=${NODE_PATH:+$NODE_PATH:}/usr/local/lib/node_modules
@@ -52,6 +56,7 @@ export CMAKE_CXX_COMPILER_LAUNCHER=ccache
 
 export XMODIFIERS="@im=fcitx"
 export EDITOR="vim"
+export VISUAL="vim"
 
 export PYTHON_BASIC_REPL=1
 bindkey -v
@@ -60,8 +65,8 @@ bindkey -v
 
 # Auto suggestion
 source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-# bindkey '^E' autosuggest-accept
-bindkey '\t' end-of-line
+bindkey '^E' autosuggest-accept
+# bindkey '\t' end-of-line
 
 # Enable syntax highlight, must put at end of this file
 source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
