@@ -63,7 +63,9 @@ bindkey -v
 
 . "$HOME/.cargo/env"
 
-unfunction command_not_found_handler
+unset -f command_not_found_handler 2> /dev/null
+unsetopt correct_all
+unsetopt correct
 
 # Auto suggestion
 source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
