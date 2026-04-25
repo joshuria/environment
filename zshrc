@@ -63,6 +63,8 @@ bindkey -v
 
 . "$HOME/.cargo/env"
 
+unfunction command_not_found_handler
+
 # Auto suggestion
 source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 bindkey '^E' autosuggest-accept
