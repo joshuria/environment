@@ -67,6 +67,10 @@ unset -f command_not_found_handler 2> /dev/null
 unsetopt correct_all
 unsetopt correct
 
+# Completeion
+fpath=(~/.zsh/completions $fpath)
+autoload -U compinit && compinit
+
 # Auto suggestion
 source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 bindkey '^E' autosuggest-accept
