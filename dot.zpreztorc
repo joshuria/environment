@@ -259,3 +259,4 @@ zstyle ':prezto:module:terminal:multiplexer-title' format '%s'
 zstyle :prezto:module:prompt theme powerlevel10k
 zstyle ':completion:*:cd:*' tag-order  '! (|*-)directories' -
 zstyle ':completion:*:ls:*' tag-order  '! (|*-)directories' -
+zstyle ':completion:*' users-hosts-ports no
