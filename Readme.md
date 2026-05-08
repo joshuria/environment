@@ -1,5 +1,13 @@
 Basic system environment settings.
 
+tmux
+===
+  - Close _tmux plugin manager_
+    ```sh
+    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+    ```
+  - In tmux, press `<PREFIX>` + `I` to install
+
 zsh
 ===
   - Install _zsh_
